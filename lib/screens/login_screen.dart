@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gerenciarlojaapp/blocs/login_bloc.dart';
+import 'package:gerenciarlojaapp/screens/home_screen.dart';
 import 'package:gerenciarlojaapp/widgets/input_fields.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -18,7 +19,8 @@ class _LoginScreenState extends State<LoginScreen> {
     _loginBloc.outState.listen((state) {
       switch (state) {
         case LoginState.SUCCESS:
-          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => null));
+          Navigator.of(context)
+              .pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
           break;
         case LoginState.FAIL:
           showDialog(
@@ -34,6 +36,14 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     });
   }
+  
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _loginBloc.dispose();
+  }
+  
 
   @override
   Widget build(BuildContext context) {
