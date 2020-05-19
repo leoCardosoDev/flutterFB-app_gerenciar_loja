@@ -1,4 +1,7 @@
+import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
+import 'package:gerenciarlojaapp/blocs/user_bloc.dart';
+import 'package:gerenciarlojaapp/tabs/users_tab.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -8,12 +11,15 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   PageController _pageController;
   int _page = 0;
+  
+  UserBloc _userBloc;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _pageController = PageController();
+    _userBloc = UserBloc();
   }
 
   @override
@@ -36,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
         ),
         child: BottomNavigationBar(
-         currentIndex: _page,
+          currentIndex: _page,
           onTap: (p) {
             _pageController.animateToPage(p,
                 duration: Duration(microseconds: 400), curve: Curves.ease);
@@ -57,24 +63,23 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      body: PageView(
-        controller: _pageController,
-        onPageChanged: (p){
-         setState(() {
-           _page = p;
-         });
-        },
-        children: <Widget>[
-          Container(
-            color: Colors.yellowAccent,
+      body: SafeArea(
+        child: BlocProvider<UserBloc>(
+          bloc: _userBloc,
+          child: PageView(
+            controller: _pageController,
+            onPageChanged: (p) {
+              setState(() {
+                _page = p;
+              });
+            },
+            children: <Widget>[
+              UsersTab(),
+              Container(color: Colors.lightBlueAccent),
+              Container(color: Colors.deepOrange),
+            ],
           ),
-          Container(
-            color: Colors.lightBlueAccent,
-          ),
-          Container(
-            color: Colors.deepOrange,
-          ),
-        ],
+        ),
       ),
     );
   }
