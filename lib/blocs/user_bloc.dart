@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rxdart/rxdart.dart';
 
 class UserBloc extends BlocBase {
+  
   final _userController = BehaviorSubject<List>();
 
   Stream<List> get outUsers => _userController.stream;
@@ -76,6 +77,10 @@ class UserBloc extends BlocBase {
 
       _userController.add(_users.values.toList());
     });
+  }
+  
+  Map<String, dynamic> getUser(String uid){
+    return _users[uid];
   }
 
   void _unsubscribeToOrders(String uid) {

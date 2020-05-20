@@ -1,7 +1,7 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:gerenciarlojaapp/blocs/user_bloc.dart';
-import 'package:gerenciarlojaapp/widgets/user_tile.dart';
+import 'package:gerenciarlojaapp/tiles/user_tile.dart';
 
 class UsersTab extends StatelessWidget {
   @override
