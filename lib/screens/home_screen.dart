@@ -6,6 +6,7 @@ import 'package:gerenciarlojaapp/blocs/user_bloc.dart';
 import 'package:gerenciarlojaapp/tabs/orders_tabs.dart';
 import 'package:gerenciarlojaapp/tabs/products_tab.dart';
 import 'package:gerenciarlojaapp/tabs/users_tab.dart';
+import 'package:gerenciarlojaapp/widgets/add_category_dialog.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -126,6 +127,15 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         );
+      case 2:
+         return FloatingActionButton(
+           child: Icon(Icons.add),
+           backgroundColor: Colors.purple,
+           onPressed: (){
+             showDialog(context: context,
+               builder: (context) => EditCategoryDialog());
+           },
+         );
     }
   }
 }
